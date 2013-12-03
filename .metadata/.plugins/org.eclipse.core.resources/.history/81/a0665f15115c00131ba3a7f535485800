@@ -1,7 +1,0 @@
-package fr.esgi.record_me;
-
-import android.widget.ArrayAdapter;
-
-public class FilesAdapter extends ArrayAdapter<T> {
-
-}
