@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
   private Chronometer time_;
   private SeekBar progress_;
   Button start_record;
+  //Button redirige;
   Button stop_record;
   AlertDialog message;
   Boolean enable=false;
@@ -45,6 +47,7 @@ public class MainActivity extends Activity {
         time_=(Chronometer) findViewById(R.id.time_);
         start_record=(Button)findViewById(R.id.btn_start);
         stop_record=(Button) findViewById(R.id.btn_stop);
+        
         start_record.setOnClickListener(action_start);
         stop_record.setOnClickListener(action_stop);
         message = new AlertDialog.Builder(this).create();
@@ -182,5 +185,20 @@ private void stopRecording() {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+    
+    // TODO Redirige
+   
+    
+	public void red(View v) {
+		// TODO Auto-generated method stub
+	    Intent i = new Intent(this,Home.class);
+		startActivity(i);
+	  // start_record.setEnabled(true);
+	//	stopRecording();
+		
+		//message.setTitle("stop");
+		//message.setMessage("Button stop record.");
+		//message.show();
+	}
     
 }

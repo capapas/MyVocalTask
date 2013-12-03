@@ -7,31 +7,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
-    android:background="@drawable/back"
+    android:background="@drawable/back_i"
      >
-
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="36dp"
-        android:layout_marginRight="44dp"
-        android:background="@drawable/ejecter" 
-        
-        />
-
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btn_stop"
-        android:layout_alignLeft="@+id/progress_"
-        android:layout_marginLeft="18dp"
-        android:background="@drawable/start"
-        
-        />
 
     <SeekBar
         android:id="@+id/progress_"
@@ -58,5 +35,33 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/progress_"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/ejecter" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/progress_"
+        android:background="@drawable/start" />
+
+    <Button
+        android:id="@+id/redirige"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:text="Button" 
+        android:onClick="red"
+        />
     
 </RelativeLayout>
