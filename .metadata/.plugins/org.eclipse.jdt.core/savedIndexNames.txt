@@ -1,4 +1,2 @@
-INDEX VERSION 1.126+D:\Recorder\Projet_Android\.metadata\.plugins\org.eclipse.jdt.core
-223104249.index
-2060195875.index
+INDEX VERSION 1.126+D:\Recorder\MyVocalTask\.metadata\.plugins\org.eclipse.jdt.core
 3303180418.index
