@@ -1,2 +1,0 @@
-INDEX VERSION 1.126+D:\Recorder\MyVocalTask\.metadata\.plugins\org.eclipse.jdt.core
-3303180418.index
