@@ -20,45 +20,45 @@ import android.widget.Toast;
 import android.media.MediaRecorder;
 
 public class MainActivity extends Activity {
-  private int cmpt=0;
-  private Chronometer time_;
-  private SeekBar progress_;
-  Button start_record;
-  //Button redirige;
-  Button stop_record;
-  AlertDialog message;
-  Boolean enable=false;
-  private static final String AUDIO_RECORDER_FILE_EXT_3GP = ".3gp";
-  private static final String AUDIO_RECORDER_FILE_EXT_MP4 = ".mp4";
-  private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
-  private int currentFormat = 0;
-  private MediaRecorder recorder=null;
-  private int output_formats[] = { MediaRecorder.OutputFormat.MPEG_4,
+	private int cmpt = 0;
+	private Chronometer time_;
+	private SeekBar progress_;
+	Button start_record;
+	// Button redirige;
+	Button stop_record;
+	AlertDialog message;
+	Boolean enable = false;
+	private static final String AUDIO_RECORDER_FILE_EXT_3GP = ".3gp";
+	private static final String AUDIO_RECORDER_FILE_EXT_MP4 = ".mp4";
+	private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
+	private int currentFormat = 0;
+	private MediaRecorder recorder = null;
+	private int output_formats[] = { MediaRecorder.OutputFormat.MPEG_4,
 			MediaRecorder.OutputFormat.THREE_GPP };
-  private String file_exts[] = { AUDIO_RECORDER_FILE_EXT_MP4,
+	private String file_exts[] = { AUDIO_RECORDER_FILE_EXT_MP4,
 			AUDIO_RECORDER_FILE_EXT_3GP };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-    	
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        progress_ =(SeekBar) findViewById(R.id.progress_);
-        time_=(Chronometer) findViewById(R.id.time_);
-        start_record=(Button)findViewById(R.id.btn_start);
-        stop_record=(Button) findViewById(R.id.btn_stop);
-        
-        start_record.setOnClickListener(action_start);
-        stop_record.setOnClickListener(action_stop);
-        message = new AlertDialog.Builder(this).create();
-        
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
 
-    }
-  private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		progress_ = (SeekBar) findViewById(R.id.progress_);
+		time_ = (Chronometer) findViewById(R.id.time_);
+		start_record = (Button) findViewById(R.id.btn_start);
+		stop_record = (Button) findViewById(R.id.btn_stop);
+
+		start_record.setOnClickListener(action_start);
+		stop_record.setOnClickListener(action_stop);
+		message = new AlertDialog.Builder(this).create();
+
+	}
+
+	private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
 		@Override
 		public void onError(MediaRecorder mr, int what, int extra) {
-			Toast.makeText(MainActivity.this,
-					"Error: " + what + ", " + extra, Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainActivity.this, "Error: " + what + ", " + extra,
+					Toast.LENGTH_SHORT).show();
 		}
 	};
 
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 		}
 	};
 
-private String getFilename() {
+	private String getFilename() {
 		String filepath = Environment.getExternalStorageDirectory().getPath();
 		File file = new File(filepath, AUDIO_RECORDER_FOLDER);
 
@@ -81,7 +81,8 @@ private String getFilename() {
 
 		return (file.getAbsolutePath() + "/" + System.currentTimeMillis() + file_exts[currentFormat]);
 	}
-private void startRecording() {
+
+	private void startRecording() {
 		recorder = new MediaRecorder();
 
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -102,103 +103,96 @@ private void startRecording() {
 		}
 	}
 
+	View.OnClickListener action_start = new View.OnClickListener() {
 
+		@Override
+		public void onClick(View v) {
 
+			// TODO Auto-generated method stub
+			if (enable == false) {
+				// TODO evenement TICK du chronometre
+				startRecording();
+				time_.setOnChronometerTickListener(new OnChronometerTickListener() {
 
-View.OnClickListener action_start= new View.OnClickListener() {
-	
+					@Override
+					public void onChronometerTick(Chronometer chronometer) {
+						// TODO Auto-generated method stub
+
+						String chronoText = time_.getText().toString();
+						String array[] = chronoText.split(":");
+						cmpt = cmpt + Integer.parseInt(array[1]);
+						progress_.setProgress(cmpt / 60);
+					}
+				});
+				start_record.setBackgroundResource(R.drawable.stop);
+				time_.start();
+				enable = true;
+			} else {
+
+				time_.stop();
+				stopRecording();
+				start_record.setBackgroundResource(R.drawable.start);
+				enable = false;
+			}
+			// start_record.setEnabled(false);
+			// startRecording();
+			// message.setTitle("start");
+			// message.setMessage("Button start record.");
+			// message.show();
+			// recorder.setAudioEncoder(MediaRecorder.AudioSource.MIC);
+
+		}
+	};
+
+	private void stopRecording() {
+		if (null != recorder) {
+			recorder.stop();
+			recorder.reset();
+			recorder.release();
+
+			recorder = null;
+		}
+	}
+
+	View.OnClickListener action_stop = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			time_.stop();
+			start_record.setBackgroundResource(R.drawable.start);
+			progress_.setProgress(0);
+			cmpt = 0;
+			time_.setBase(SystemClock.elapsedRealtime());
+
+			// start_record.setEnabled(true);
+			// stopRecording();
+
+			// message.setTitle("stop");
+			// message.setMessage("Button stop record.");
+			// message.show();
+		}
+	};
+
 	@Override
-	public void onClick(View v) {
-	
-		// TODO Auto-generated method stub
-	    if(enable==false)
-	    {
-	    	// TODO evenement TICK du chronometre 
-	    	startRecording();
-	    	time_.setOnChronometerTickListener(new OnChronometerTickListener() {
-				
-				@Override
-				
-				public void onChronometerTick(Chronometer chronometer) {
-					// TODO Auto-generated method stub
-					
-					String chronoText = time_.getText().toString();
-			        String array[] = chronoText.split(":");
-			        cmpt=cmpt+Integer.parseInt(array[1]);
-			    	progress_.setProgress(cmpt/60);
-				}
-			});
-	    start_record.setBackgroundResource(R.drawable.stop); 	
-	    time_.start();
-		enable=true;
-	    }
-	    else{
-	    
-	    	time_.stop();
-	    	stopRecording();
-	    	start_record.setBackgroundResource(R.drawable.start);
-	    	enable=false;
-	    }
-		//start_record.setEnabled(false);
-	//	startRecording();
-	//	message.setTitle("start");
-	//	message.setMessage("Button start record.");
-	//	message.show();
-		//recorder.setAudioEncoder(MediaRecorder.AudioSource.MIC);
-		
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	}
-};
 
-private void stopRecording() {
-	if (null != recorder) {
-		recorder.stop();
-		recorder.reset();
-		recorder.release();
+	// TODO Redirige
 
-		recorder = null;
-	}
-}
-
-  View.OnClickListener action_stop=new View.OnClickListener() {
-	
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		time_.stop();
-		start_record.setBackgroundResource(R.drawable.start);
-		progress_.setProgress(0);
-		cmpt=0;
-		time_.setBase(SystemClock.elapsedRealtime());
-		
-	  // start_record.setEnabled(true);
-	//	stopRecording();
-		
-		//message.setTitle("stop");
-		//message.setMessage("Button stop record.");
-		//message.show();
-	}
-};  
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    
-    // TODO Redirige
-   
-    
 	public void red(View v) {
 		// TODO Auto-generated method stub
-	    Intent i = new Intent(this,Home.class);
+		Intent i = new Intent(this, Home.class);
 		startActivity(i);
-	  // start_record.setEnabled(true);
-	//	stopRecording();
-		
-		//message.setTitle("stop");
-		//message.setMessage("Button stop record.");
-		//message.show();
+		// start_record.setEnabled(true);
+		// stopRecording();
+
+		// message.setTitle("stop");
+		// message.setMessage("Button stop record.");
+		// message.show();
 	}
-    
+
 }
