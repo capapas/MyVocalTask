@@ -24,7 +24,7 @@ import android.widget.TextView;
 public class Home extends Activity implements OnItemClickListener {
 	private File file;
 	private String path_note = "";
-	private ArrayList<String> liste_;
+	private ArrayList<File> liste_;
 	AlertDialog message;
 	final String state = Environment.getExternalStorageState();
 	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
@@ -35,7 +35,7 @@ public class Home extends Activity implements OnItemClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		liste_ = new ArrayList<String>();
+		liste_ = new ArrayList<File>();
 		getAllFilesOfDir(Environment.getExternalStorageDirectory());
 		FilesAdapter fa = new FilesAdapter(this, R.layout.my_files, liste_);
 		((ListView) findViewById(R.id.listView1)).setAdapter(fa);
@@ -115,7 +115,7 @@ public class Home extends Activity implements OnItemClickListener {
 							Log.e("Record", "File_date: " + file.lastModified()
 									 + "\n");
 							
-							liste_.add(file.getName());
+							liste_.add(file);
 							
 						}
 
