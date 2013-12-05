@@ -1,19 +1,26 @@
 package fr.esgi.record_me;
 
+import java.io.File;
+
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 
 public class Media_Player extends Activity {
-	private String path_note;
+	private String path_note="";
 	private MediaPlayer media=null;
-	
-private Home my_note=new Home(media,path_note);
+	AlertDialog message;
+   private Home my_note=new Home();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_media__player);
+		my_note.Get_Param( path_note);
+		
 	}
 
 	@Override
@@ -23,15 +30,31 @@ private Home my_note=new Home(media,path_note);
 		return true;
 	}
 public void play(){
+	// Log.e("moi","Directory: hello\n");
+	 message=new AlertDialog.Builder(this).create();
+	 message.setMessage("Play");
+	 message.show();
+		//File test= new File(path_note);
+		//if(test.exists()){
+		//media = MediaPlayer.create(this, Uri.parse(path_note));
+		//media.setScreenOnWhilePlaying(true);
+		//media.start();
+		
+		//}
 	
-	my_note.PlayNote(path_note);
 }
 public void stop(){
-	my_note.StopNote();
+
+	if(media!=null){
+		media.stop();
+		media.release();
+		
+	}
 	
 }
 public void pause(){
 	
 	
 }
+
 }

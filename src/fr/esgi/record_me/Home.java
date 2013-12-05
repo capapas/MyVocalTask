@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -25,12 +26,11 @@ public class Home extends Activity implements OnItemClickListener {
 	AlertDialog message;
 	final String state = Environment.getExternalStorageState();
 	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
-private MediaPlayer media=null;
-public Home(MediaPlayer media_,String Ma_note){
-	
-	media_=this.media;
-	Ma_note=path_note;
-}  
+
+ 
+// TODO Constructeur d'inisialisation
+    
+  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,27 +42,13 @@ public Home(MediaPlayer media_,String Ma_note){
 		((ListView) findViewById(R.id.listView1)).setOnItemClickListener(this);
 
 	}
-public void PlayNote(String path_){
+
+ public void Get_Param(String Ma_note){
 	
-	 // =//new MediaPlayer();
-	// public static MediaPlayer create (Context context, Uri uri)
-	File test= new File(path_);
-	
-	if(test.exists()){
-	media = MediaPlayer.create(this, Uri.parse(path_));
-	media.setScreenOnWhilePlaying(true);
-	media.start();
-	}
-	
-}
-public void StopNote(){
-	
-	if(media!=null){
-		media.stop();
-		media.release();
-		
-	}
-}
+    Ma_note=this.path_note;
+    
+    }  
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
@@ -70,15 +56,18 @@ public void StopNote(){
 		TextView path = (TextView) arg1.findViewById(R.id.txt_filename);
 		 path_note = Environment.getExternalStorageDirectory() + "/"+AUDIO_RECORDER_FOLDER+"/"+path.getText().toString();
 		// public static MediaPlayer create (Context context, int resid)
-		 StopNote();
-	     PlayNote(path_note);
-	    
+		// StopNote();
+	 //    PlayNote(path_note);
+		  to_media_player();
 		// message=new AlertDialog.Builder(this).create();
 		// message.setTitle("File");
 		// message.setMessage(name_file+"");
 		// message.show();
 	}
-
+	 private void to_media_player(){
+		    Intent i = new Intent(this, Media_Player.class);
+			startActivity(i);
+	 }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
