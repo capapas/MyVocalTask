@@ -26,6 +26,11 @@ public class Home extends Activity implements OnItemClickListener {
 	final String state = Environment.getExternalStorageState();
 	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
 private MediaPlayer media=null;
+public Home(MediaPlayer media_,String Ma_note){
+	
+	media_=this.media;
+	Ma_note=path_note;
+}  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
