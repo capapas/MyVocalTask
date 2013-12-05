@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 	private SeekBar progress_;
 	Button start_record;
 	// Button redirige;
-	Button stop_record;
+	Button save_record;
 	AlertDialog message;
 	String date_sys;
 	Boolean enable = false;
@@ -52,10 +52,10 @@ public class MainActivity extends Activity {
 		progress_ = (SeekBar) findViewById(R.id.progress_);
 		time_ = (Chronometer) findViewById(R.id.time_);
 		start_record = (Button) findViewById(R.id.btn_start);
-		stop_record = (Button) findViewById(R.id.btn_stop);
+		save_record = (Button) findViewById(R.id.btn_save);
 
 		start_record.setOnClickListener(action_start);
-		stop_record.setOnClickListener(action_stop);
+		save_record.setOnClickListener(action_stop);
 		message = new AlertDialog.Builder(this).create();
 
 	}
@@ -123,18 +123,21 @@ public class MainActivity extends Activity {
 					@Override
 					public void onChronometerTick(Chronometer chronometer) {
 						// TODO Auto-generated method stub
-
+					
 						String chronoText = time_.getText().toString();
 						String array[] = chronoText.split(":");
 						cmpt = cmpt + Integer.parseInt(array[1]);
 						progress_.setProgress(cmpt / 60);
+					
 					}
 				});
+			
 				start_record.setBackgroundResource(R.drawable.stop);
 				time_.start();
 				enable = true;
 			} else {
-
+				save_record.setEnabled(true);
+				
 				time_.stop();
 				///stopRecording();
 				start_record.setBackgroundResource(R.drawable.start);
@@ -229,8 +232,9 @@ private void Save_My_Note(){
 				File file = new File(filepath+"/"+date_sys+file_exts[currentFormat]);
 				
 				if(file.exists()){
-				
+					
 					file.renameTo(out);
+					save_record.setEnabled(true);
 				}
 			}
 		});

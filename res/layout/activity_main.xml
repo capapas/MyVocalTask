@@ -10,47 +10,22 @@
     android:background="@color/black"
      >
 
-    <SeekBar
-        android:id="@+id/progress_"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_stop"
-        android:layout_marginBottom="18dp"
-        android:maxHeight="4dp"
-        android:minHeight="4dp"
-        android:thumb="@drawable/thumb" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/mic_back" />
-
-    <Chronometer
-        android:id="@+id/time_"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-
     <Button
-        android:id="@+id/btn_stop"
+        android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/progress_"
         android:layout_marginBottom="52dp"
-        android:background="@drawable/ejecter" />
+        android:background="@drawable/actions_document_save"
+        android:enabled="false"
+         />
 
     <Button
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_stop"
-        android:layout_alignBottom="@+id/btn_stop"
+        android:layout_above="@+id/redirige"
         android:layout_alignLeft="@+id/progress_"
         android:background="@drawable/start" />
 
@@ -59,9 +34,42 @@
         style="@style/btnStyleOrange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
         android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btn_save"
         android:onClick="red"
         android:text="Liste des notes" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/mic_back" />
+
+    <Chronometer
+        android:id="@+id/time_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"  
+        android:textColor="#FFF"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <SeekBar
+        android:id="@+id/progress_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_save"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:maxHeight="10dip"
+        android:minHeight="10dip"
+        android:thumb="@drawable/thumb"
+        android:thumbOffset="0px"
+      
+         />
     
 </RelativeLayout>
