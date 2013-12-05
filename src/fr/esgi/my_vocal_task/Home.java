@@ -2,6 +2,8 @@ package fr.esgi.my_vocal_task;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import fr.esgi.record_me.R;
 
@@ -10,7 +12,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,7 +40,22 @@ public class Home extends Activity implements OnItemClickListener {
 		FilesAdapter fa = new FilesAdapter(this, R.layout.my_files, liste_);
 		((ListView) findViewById(R.id.listView1)).setAdapter(fa);
 		((ListView) findViewById(R.id.listView1)).setOnItemClickListener(this);
-
+	}
+	
+	// Cette fonction appelle les traitements associées au menu en haut
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_sort_date:
+	            Log.e("itemSelected", "Trier par date sélectionné");
+	            return true;
+	        case R.id.action_sort_size:
+	        	Log.e("itemSelected", "Trier par taille sélectionné");
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	public void Get_Param(String Ma_note) {
@@ -91,10 +110,13 @@ public class Home extends Activity implements OnItemClickListener {
 								|| file.getAbsolutePath().endsWith(".MP4")) {
 							// Log.e("Record", "File: " + file.getName() +
 							// "\n");
-							// Log.e("Record", "File: " + file.getAbsolutePath()
-							// + "\n");
+//							 Log.e("Record", "File: " + file.getAbsolutePath()
+//							 + "\n");
+							Log.e("Record", "File_date: " + file.lastModified()
+									 + "\n");
+							
 							liste_.add(file.getName());
-
+							
 						}
 
 					}
@@ -102,5 +124,10 @@ public class Home extends Activity implements OnItemClickListener {
 			}
 		}
 	}
+	
+//	private void sort_by_date() {
+//		Collections.sort(liste_, new Comparator<File>() {
+//		})
+//	}
 
 }

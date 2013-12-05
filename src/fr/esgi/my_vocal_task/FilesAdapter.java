@@ -2,17 +2,14 @@ package fr.esgi.my_vocal_task;
 
 import java.util.ArrayList;
 
-import fr.esgi.record_me.R;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import fr.esgi.record_me.R;
 
 public class FilesAdapter extends ArrayAdapter<String> {
 	private ArrayList<String> data;
