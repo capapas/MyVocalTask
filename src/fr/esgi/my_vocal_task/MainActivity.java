@@ -1,7 +1,9 @@
-package fr.esgi.record_me;
+package fr.esgi.my_vocal_task;
 
 import java.io.File;
 import java.io.IOException;
+
+import fr.esgi.record_me.R;
 
 import android.os.Bundle;
 import android.os.Environment;
