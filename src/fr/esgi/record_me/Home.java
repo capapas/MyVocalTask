@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -23,7 +22,8 @@ public class Home extends Activity implements OnItemClickListener {
 	AlertDialog message;
 	final String state = Environment.getExternalStorageState();
 	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
-	private MediaPlayer media = null;
+
+	// TODO Constructeur d'inisialisation
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +34,13 @@ public class Home extends Activity implements OnItemClickListener {
 		FilesAdapter fa = new FilesAdapter(this, R.layout.my_files, liste_);
 		((ListView) findViewById(R.id.listView1)).setAdapter(fa);
 		((ListView) findViewById(R.id.listView1)).setOnItemClickListener(this);
+
 	}
 
-	public void PlayNote(String path_) {
+	public void Get_Param(String Ma_note) {
 
-		// =//new MediaPlayer();
-		// public static MediaPlayer create (Context context, Uri uri)
-		File test = new File(path_);
+		Ma_note = this.path_note;
 
-		if (test.exists()) {
-			media = MediaPlayer.create(this, Uri.parse(path_));
-			media.setScreenOnWhilePlaying(true);
-			media.start();
-		}
-	}
-
-	public void StopNote() {
-
-		if (media != null) {
-			media.stop();
-			media.release();
-		}
 	}
 
 	@Override
@@ -65,13 +51,18 @@ public class Home extends Activity implements OnItemClickListener {
 		path_note = Environment.getExternalStorageDirectory() + "/"
 				+ AUDIO_RECORDER_FOLDER + "/" + path.getText().toString();
 		// public static MediaPlayer create (Context context, int resid)
-		StopNote();
-		PlayNote(path_note);
-
+		// StopNote();
+		// PlayNote(path_note);
+		to_media_player();
 		// message=new AlertDialog.Builder(this).create();
 		// message.setTitle("File");
 		// message.setMessage(name_file+"");
 		// message.show();
+	}
+
+	private void to_media_player() {
+		Intent i = new Intent(this, Media_Player.class);
+		startActivity(i);
 	}
 
 	@Override
