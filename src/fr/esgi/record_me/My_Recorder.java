@@ -24,7 +24,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 import android.media.MediaRecorder;
 
-public class MainActivity extends Activity {
+public class My_Recorder extends Activity {
 	private int cmpt = 0;
 	private Chronometer time_;
 	private SeekBar progress_;
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_my_recorder);
 		progress_ = (SeekBar) findViewById(R.id.progress_);
 		time_ = (Chronometer) findViewById(R.id.time_);
 		start_record = (Button) findViewById(R.id.btn_start);
@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 	private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
 		@Override
 		public void onError(MediaRecorder mr, int what, int extra) {
-			Toast.makeText(MainActivity.this, "Error: " + what + ", " + extra,
+			Toast.makeText(My_Recorder.this, "Error: " + what + ", " + extra,
 					Toast.LENGTH_SHORT).show();
 		}
 	};
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 	private MediaRecorder.OnInfoListener infoListener = new MediaRecorder.OnInfoListener() {
 		@Override
 		public void onInfo(MediaRecorder mr, int what, int extra) {
-			Toast.makeText(MainActivity.this,
+			Toast.makeText(My_Recorder.this,
 					"Warning: " + what + ", " + extra, Toast.LENGTH_SHORT)
 					.show();
 		}
