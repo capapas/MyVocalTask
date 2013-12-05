@@ -20,10 +20,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Home extends Activity implements OnItemClickListener {
 	private File file;
+	private String path_note="";
 	private ArrayList<String> liste_;
 	AlertDialog message;
 	final String state = Environment.getExternalStorageState();
-
+	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
+private MediaPlayer media=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,21 +37,37 @@ public class Home extends Activity implements OnItemClickListener {
 		((ListView) findViewById(R.id.listView1)).setOnItemClickListener(this);
 
 	}
-
+public void PlayNote(String path_){
+	
+	 // =//new MediaPlayer();
+	// public static MediaPlayer create (Context context, Uri uri)
+	File test= new File(path_);
+	
+	if(test.exists()){
+	media = MediaPlayer.create(this, Uri.parse(path_));
+	media.setScreenOnWhilePlaying(true);
+	media.start();
+	}
+	
+}
+public void StopNote(){
+	
+	if(media!=null){
+		media.stop();
+		media.release();
+		
+	}
+}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
 
 		TextView path = (TextView) arg1.findViewById(R.id.txt_filename);
-		String name_file = Environment.getExternalStorageDirectory() + "/"
-				+ path.getText().toString();
+		 path_note = Environment.getExternalStorageDirectory() + "/"+AUDIO_RECORDER_FOLDER+"/"+path.getText().toString();
 		// public static MediaPlayer create (Context context, int resid)
-		MediaPlayer media; // =//new MediaPlayer();
-		// public static MediaPlayer create (Context context, Uri uri)
-		media = MediaPlayer.create(this, Uri.parse(name_file));
-		media.setScreenOnWhilePlaying(true);
-		media.start();
-
+		 StopNote();
+	     PlayNote(path_note);
+	    
 		// message=new AlertDialog.Builder(this).create();
 		// message.setTitle("File");
 		// message.setMessage(name_file+"");
@@ -65,8 +83,8 @@ public class Home extends Activity implements OnItemClickListener {
 
 	private void getAllFilesOfDir(File directory) {
 		// Log.e("Record","Directory: " + directory.getAbsolutePath() + "\n");
-
-		final File[] files = directory.listFiles();
+        File f=new File(directory+"/"+AUDIO_RECORDER_FOLDER);
+		final File[] files = f.listFiles();
 
 		if (files != null) {
 			for (File file : files) {
@@ -74,7 +92,7 @@ public class Home extends Activity implements OnItemClickListener {
 					if (file.isDirectory()) { // it is a folder...
 						getAllFilesOfDir(file);
 					} else { // it is a file...
-						if (file.getAbsolutePath().endsWith(".mp3")) {
+						if (file.getAbsolutePath().endsWith(".mp3") || file.getAbsolutePath().endsWith(".MP3") || file.getAbsolutePath().endsWith(".mp4") || file.getAbsolutePath().endsWith(".MP4")) {
 							// Log.e("Record", "File: " + file.getName() +
 							// "\n");
 							// Log.e("Record", "File: " + file.getAbsolutePath()

@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 	Boolean enable = false;
 	private static final String AUDIO_RECORDER_FILE_EXT_3GP = ".3gp";
 	private static final String AUDIO_RECORDER_FILE_EXT_MP4 = ".mp4";
-	private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
+	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
 	private int currentFormat = 0;
 	private MediaRecorder recorder = null;
 	private int output_formats[] = { MediaRecorder.OutputFormat.MPEG_4,
