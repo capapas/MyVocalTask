@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
-    android:background="@drawable/back_i"
+    android:background="@color/black"
      >
 
     <SeekBar
@@ -49,19 +49,19 @@
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/progress_"
+        android:layout_alignBaseline="@+id/btn_stop"
+        android:layout_alignBottom="@+id/btn_stop"
+        android:layout_alignLeft="@+id/progress_"
         android:background="@drawable/start" />
 
     <Button
         android:id="@+id/redirige"
+        style="@style/btnStyleOrange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="23dp"
-        android:text="Button" 
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignParentBottom="true"
         android:onClick="red"
-        />
+        android:text="Liste des notes" />
     
 </RelativeLayout>
