@@ -22,12 +22,11 @@ import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.Toast;
 import android.media.MediaRecorder;
 
 public class My_Recorder extends Activity {
-	private int cmpt = 0;
+
 	private Chronometer time_;
 //	private SeekBar progress_;
 	Button start_record;
@@ -119,17 +118,17 @@ public class My_Recorder extends Activity {
 			// TODO Auto-generated method stub
 			if (enable == false) {
 				// TODO evenement TICK du chronometre
+				if(recorder==null){
 				startRecording();
+				
+				}
 				time_.setOnChronometerTickListener(new OnChronometerTickListener() {
 
 					@Override
 					public void onChronometerTick(Chronometer chronometer) {
 						// TODO Auto-generated method stub
 					
-						String chronoText = time_.getText().toString();
-						String array[] = chronoText.split(":");
-					//	cmpt = cmpt + Integer.parseInt(array[1]);
-					//	progress_.setProgress(cmpt / 60);
+					   
 					
 					}
 				});
@@ -139,7 +138,6 @@ public class My_Recorder extends Activity {
 				enable = true;
 			} else {
 				save_record.setEnabled(true);
-				
 				time_.stop();
 				///stopRecording();
 				start_record.setBackgroundResource(R.drawable.start);
@@ -154,7 +152,18 @@ public class My_Recorder extends Activity {
 
 		}
 	};
-
+private void pauseRecording(){
+	if(null !=recorder){
+		
+		try {
+			this.recorder.wait(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+}
 	private void stopRecording() {
 		if (null != recorder) {
 			
@@ -163,7 +172,7 @@ public class My_Recorder extends Activity {
 			recorder.reset();
 			recorder.release();
 		//	progress_.setProgress(0);
-			cmpt = 0;
+	
 			time_.setBase(SystemClock.elapsedRealtime());
 			recorder = null;
 		}
@@ -208,6 +217,23 @@ private void Save_My_Note(){
 		
 		
 		alert
+		.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+			File out_cancel=null;
+		 	String filepath = Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER;
+			File file = new File(filepath+"/"+date_sys+file_exts[currentFormat]);
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				// TODO Auto-generated method stub
+			
+				out_cancel=new File(filepath+"/"+System.currentTimeMillis()+file_exts[currentFormat]);
+
+				if(file.exists()){
+					
+					file.renameTo(out_cancel);
+					save_record.setEnabled(false);
+				}
+			}
+		})
 		.setPositiveButton("Save",new  DialogInterface.OnClickListener() {
 			
 			@Override
@@ -236,7 +262,7 @@ private void Save_My_Note(){
 				if(file.exists()){
 					
 					file.renameTo(out);
-					save_record.setEnabled(true);
+					save_record.setEnabled(false);
 				}
 			}
 		});
@@ -245,11 +271,7 @@ private void Save_My_Note(){
          
 		
           }	
-private boolean checkString(String s) {
 
-      return s.matches("\\w*[.](java|cpp|class)");
-
-  }
 
 	// TODO Redirige
 
@@ -257,12 +279,7 @@ private boolean checkString(String s) {
 		// TODO Auto-generated method stub
 		Intent i = new Intent(this, Home.class);
 		startActivity(i);
-		// start_record.setEnabled(true);
-		// stopRecording();
-
-		// message.setTitle("stop");
-		// message.setMessage("Button stop record.");
-		// message.show();
+		
 	}
 
 }
