@@ -16,7 +16,7 @@
 
         <TableRow
             android:gravity="center"
-            android:paddingTop="10px" >
+            android:paddingTop="10dip" >
 
             <ImageView
                 android:id="@+id/imageView1"
