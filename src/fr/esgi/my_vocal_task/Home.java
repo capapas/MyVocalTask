@@ -25,9 +25,12 @@ public class Home extends Activity implements OnItemClickListener {
 	private File file;
 	private String path_note = "";
 	private ArrayList<File> liste_;
+	FilesAdapter fa;
 	AlertDialog message;
 	final String state = Environment.getExternalStorageState();
 	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
+	private boolean order_date_asc = false;
+	private boolean order_size_asc = false;
 
 	// TODO Constructeur d'inisialisation
 
@@ -37,25 +40,27 @@ public class Home extends Activity implements OnItemClickListener {
 		setContentView(R.layout.activity_home);
 		liste_ = new ArrayList<File>();
 		getAllFilesOfDir(Environment.getExternalStorageDirectory());
-		FilesAdapter fa = new FilesAdapter(this, R.layout.my_files, liste_);
+		fa = new FilesAdapter(this, R.layout.my_files, liste_);
 		((ListView) findViewById(R.id.listView1)).setAdapter(fa);
 		((ListView) findViewById(R.id.listView1)).setOnItemClickListener(this);
 	}
-	
+
 	// Cette fonction appelle les traitements associées au menu en haut
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
-	    switch (item.getItemId()) {
-	        case R.id.action_sort_date:
-	            Log.e("itemSelected", "Trier par date");
-	            return true;
-	        case R.id.action_sort_size:
-	        	Log.e("itemSelected", "Trier par taille");
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
+		switch (item.getItemId()) {
+		case R.id.action_sort_date:
+			sort_by_date();
+			Log.e("itemSelected", "Trier par date");
+			return true;
+		case R.id.action_sort_size:
+			sort_by_size();
+			Log.e("itemSelected", "Trier par taille");
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	public void Get_Param(String Ma_note) {
@@ -110,24 +115,48 @@ public class Home extends Activity implements OnItemClickListener {
 								|| file.getAbsolutePath().endsWith(".MP4")) {
 							// Log.e("Record", "File: " + file.getName() +
 							// "\n");
-//							 Log.e("Record", "File: " + file.getAbsolutePath()
-//							 + "\n");
+							// Log.e("Record", "File: " + file.getAbsolutePath()
+							// + "\n");
 							Log.e("Record", "File_date: " + file.lastModified()
-									 + "\n");
-							
-							liste_.add(file);
-							
-						}
+									+ "\n");
 
+							liste_.add(file);
+						}
 					}
 				}
 			}
 		}
 	}
-	
-//	private void sort_by_date() {
-//		Collections.sort(liste_, new Comparator<File>() {
-//		})
-//	}
 
+	private void sort_by_date() {
+		Collections.sort(liste_, new Comparator<File>() {
+
+			@Override
+			public int compare(File lhs, File rhs) {
+				if (order_date_asc) {
+					return (int) (lhs.lastModified() - rhs.lastModified());
+				} else {
+					return (int) (rhs.lastModified() - lhs.lastModified());
+				}
+			}
+		});
+		order_date_asc = !order_date_asc;
+		fa.notifyDataSetChanged();
+	}
+
+	private void sort_by_size() {
+		Collections.sort(liste_, new Comparator<File>() {
+
+			@Override
+			public int compare(File lhs, File rhs) {
+				if (order_size_asc) {
+					return (int) (lhs.length() - rhs.length());
+				} else {
+					return (int) (rhs.length() - lhs.length());
+				}
+			}
+		});
+		order_size_asc = !order_size_asc;
+		fa.notifyDataSetChanged();
+	}
 }

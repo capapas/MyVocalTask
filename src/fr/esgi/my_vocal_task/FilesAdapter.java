@@ -67,7 +67,7 @@ public class FilesAdapter extends ArrayAdapter<File> {
 	        fileSize = fileSizeByte/(1024*1024);
 	        //textFileSize = fileSize < 1 ? (fileSize*1024)+"Ko" : fileSize+"Mo";
 			
-			viewHolder.filedate.setText("Modifié le : " + dateText);
+			viewHolder.filedate.setText("Modifiï¿½ le : " + dateText);
 			viewHolder.filesize.setText(textFileSize);
 		}
 		return v;
@@ -83,5 +83,7 @@ public class FilesAdapter extends ArrayAdapter<File> {
 		TextView filedate;
 		TextView filesize;
 	}
+	
+	
 
 }
