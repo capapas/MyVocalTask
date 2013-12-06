@@ -1,8 +1,10 @@
-package fr.esgi.record_me;
+package fr.esgi.my_vocal_task;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.esgi.record_me.R;
 
 import android.media.MediaPlayer;
 import android.net.Uri;

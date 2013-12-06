@@ -1,6 +1,8 @@
-package fr.esgi.record_me;
+package fr.esgi.my_vocal_task;
 
 import java.util.ArrayList;
+
+import fr.esgi.record_me.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
