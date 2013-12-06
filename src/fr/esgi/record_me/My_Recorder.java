@@ -60,7 +60,7 @@ public class My_Recorder extends Activity {
 
 	}
 
-	private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
+/*	private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
 		@Override
 		public void onError(MediaRecorder mr, int what, int extra) {
 			Toast.makeText(My_Recorder.this, "Error: " + what + ", " + extra,
@@ -76,7 +76,7 @@ public class My_Recorder extends Activity {
 					.show();
 		}
 	};
-
+*/
 	private String getFilename() {
 		String filepath = Environment.getExternalStorageDirectory().getPath();
 		File file = new File(filepath, AUDIO_RECORDER_FOLDER);
@@ -96,8 +96,8 @@ public class My_Recorder extends Activity {
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 		recorder.setOutputFile(getFilename());
 
-		recorder.setOnErrorListener(errorListener);
-		recorder.setOnInfoListener(infoListener);
+		//recorder.setOnErrorListener(errorListener);
+		//recorder.setOnInfoListener(infoListener);
 
 		try {
 			recorder.prepare();
