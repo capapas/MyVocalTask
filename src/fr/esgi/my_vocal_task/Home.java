@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import fr.esgi.record_me.R;
+import fr.esgi.my_vocal_task.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

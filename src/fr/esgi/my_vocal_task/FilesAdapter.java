@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import fr.esgi.record_me.R;
+import fr.esgi.my_vocal_task.R;
 
 public class FilesAdapter extends ArrayAdapter<File> {
 	private ArrayList<File> data;

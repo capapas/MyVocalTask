@@ -17,7 +17,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/progress_"
         android:layout_marginBottom="52dp"
-        android:background="@drawable/actions_document_save"
         android:enabled="false"
          />
 

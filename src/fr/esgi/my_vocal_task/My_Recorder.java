@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import fr.esgi.record_me.R;
+import fr.esgi.my_vocal_task.R;
 
 import android.os.Bundle;
 import android.os.Environment;
