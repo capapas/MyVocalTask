@@ -48,10 +48,10 @@ public class Home extends Activity implements OnItemClickListener {
 		// Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_sort_date:
-	            Log.e("itemSelected", "Trier par date sélectionné");
+	            Log.e("itemSelected", "Trier par date");
 	            return true;
 	        case R.id.action_sort_size:
-	        	Log.e("itemSelected", "Trier par taille sélectionné");
+	        	Log.e("itemSelected", "Trier par taille");
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

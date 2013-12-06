@@ -1,6 +1,7 @@
 package fr.esgi.my_vocal_task;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -45,12 +46,29 @@ public class FilesAdapter extends ArrayAdapter<File> {
 		File file = data.get(position);
 		if (data != null) {
 
-			viewHolder.filename.setText(file.getName());
-			float fileSize = (file.length()/(1024*1024));
-//			Date dateModified = new Date(file.lastModified());
-//			DateFormat dateFormat = new DateFormat();
-			viewHolder.filedate.setText("Modifi√© le : " + file.lastModified()+"");
-			viewHolder.filesize.setText(fileSize+"Mb");
+			viewHolder.filename.setText(file.getName().substring(0, file.getName().lastIndexOf('.')));
+			
+			Date dateModified = new Date(file.lastModified());
+			SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
+	        String dateText = df2.format(dateModified);
+	        
+	        long fileSizeByte = file.length();
+	        double fileSize = 0.00;
+	        String textFileSize = "0o";
+	        if(fileSizeByte < 1024) {
+	        	textFileSize = fileSizeByte+"o";
+	        } else if (fileSizeByte < (1024*1024)) {
+				fileSize = fileSizeByte/1024;
+				textFileSize = fileSize+"Ko";
+			} else if (fileSizeByte < (1024*1024*1024)) {
+				fileSize = fileSizeByte/(1024*1024);
+				textFileSize = fileSize+"Mo";
+			}
+	        fileSize = fileSizeByte/(1024*1024);
+	        //textFileSize = fileSize < 1 ? (fileSize*1024)+"Ko" : fileSize+"Mo";
+			
+			viewHolder.filedate.setText("ModifiÈ le : " + dateText);
+			viewHolder.filesize.setText(textFileSize);
 		}
 		return v;
 	}
