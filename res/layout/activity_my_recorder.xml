@@ -36,7 +36,7 @@
                 android:id="@+id/time_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="80dip"
+                android:layout_marginLeft="90dip"
                 android:textColor="#FFF"
                 android:textSize="30sp"
                 android:textStyle="bold" 
