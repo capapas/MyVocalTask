@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import fr.esgi.record_me.R;
+import fr.esgi.my_vocal_task.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -42,16 +42,16 @@ public class Home extends Activity implements OnItemClickListener {
 		((ListView) findViewById(R.id.listView1)).setOnItemClickListener(this);
 	}
 	
-	// Cette fonction appelle les traitements associées au menu en haut
+	// Cette fonction appelle les traitements associÃ©es au menu en haut
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_sort_date:
-	            Log.e("itemSelected", "Trier par date sélectionné");
+	            Log.e("itemSelected", "Trier par date sÃ©lectionnÃ©");
 	            return true;
 	        case R.id.action_sort_size:
-	        	Log.e("itemSelected", "Trier par taille sélectionné");
+	        	Log.e("itemSelected", "Trier par taille sÃ©lectionnÃ©");
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
