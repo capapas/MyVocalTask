@@ -2,79 +2,88 @@ package fr.esgi.my_vocal_task;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 import fr.esgi.record_me.R;
 
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class Home extends Activity implements OnItemClickListener {
 	private File file;
-	private String path_note="";
-	private ArrayList<String> liste_;
+	private String path_note = "";
+	private ArrayList<File> liste_;
 	AlertDialog message;
 	final String state = Environment.getExternalStorageState();
 	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
-private MediaPlayer media=null;
-  
+
+	// TODO Constructeur d'inisialisation
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		liste_ = new ArrayList<String>();
+		liste_ = new ArrayList<File>();
 		getAllFilesOfDir(Environment.getExternalStorageDirectory());
 		FilesAdapter fa = new FilesAdapter(this, R.layout.my_files, liste_);
 		((ListView) findViewById(R.id.listView1)).setAdapter(fa);
 		((ListView) findViewById(R.id.listView1)).setOnItemClickListener(this);
+	}
+	
+	// Cette fonction appelle les traitements associées au menu en haut
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_sort_date:
+	            Log.e("itemSelected", "Trier par date sélectionné");
+	            return true;
+	        case R.id.action_sort_size:
+	        	Log.e("itemSelected", "Trier par taille sélectionné");
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+
+	public void Get_Param(String Ma_note) {
+
+		Ma_note = this.path_note;
 
 	}
-public void PlayNote(String path_){
-	
-	 // =//new MediaPlayer();
-	// public static MediaPlayer create (Context context, Uri uri)
-	File test= new File(path_);
-	
-	if(test.exists()){
-	media = MediaPlayer.create(this, Uri.parse(path_));
-	media.setScreenOnWhilePlaying(true);
-	media.start();
-	}
-	
-}
-public void StopNote(){
-	
-	if(media!=null){
-		media.stop();
-		media.release();
-		
-	}
-}
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
 
 		TextView path = (TextView) arg1.findViewById(R.id.txt_filename);
-		 path_note = Environment.getExternalStorageDirectory() + "/"+AUDIO_RECORDER_FOLDER+"/"+path.getText().toString();
+		path_note = Environment.getExternalStorageDirectory() + "/"
+				+ AUDIO_RECORDER_FOLDER + "/" + path.getText().toString();
 		// public static MediaPlayer create (Context context, int resid)
-		 StopNote();
-	     PlayNote(path_note);
-	    
+		// StopNote();
+		// PlayNote(path_note);
+		to_media_player();
 		// message=new AlertDialog.Builder(this).create();
 		// message.setTitle("File");
 		// message.setMessage(name_file+"");
 		// message.show();
+	}
+
+	private void to_media_player() {
+		Intent i = new Intent(this, Media_Player.class);
+		startActivity(i);
 	}
 
 	@Override
@@ -86,7 +95,7 @@ public void StopNote(){
 
 	private void getAllFilesOfDir(File directory) {
 		// Log.e("Record","Directory: " + directory.getAbsolutePath() + "\n");
-        File f=new File(directory+"/"+AUDIO_RECORDER_FOLDER);
+		File f = new File(directory + "/" + AUDIO_RECORDER_FOLDER);
 		final File[] files = f.listFiles();
 
 		if (files != null) {
@@ -95,13 +104,19 @@ public void StopNote(){
 					if (file.isDirectory()) { // it is a folder...
 						getAllFilesOfDir(file);
 					} else { // it is a file...
-						if (file.getAbsolutePath().endsWith(".mp3") || file.getAbsolutePath().endsWith(".MP3") || file.getAbsolutePath().endsWith(".mp4") || file.getAbsolutePath().endsWith(".MP4")) {
+						if (file.getAbsolutePath().endsWith(".mp3")
+								|| file.getAbsolutePath().endsWith(".MP3")
+								|| file.getAbsolutePath().endsWith(".mp4")
+								|| file.getAbsolutePath().endsWith(".MP4")) {
 							// Log.e("Record", "File: " + file.getName() +
 							// "\n");
-							// Log.e("Record", "File: " + file.getAbsolutePath()
-							// + "\n");
-							liste_.add(file.getName());
-
+//							 Log.e("Record", "File: " + file.getAbsolutePath()
+//							 + "\n");
+							Log.e("Record", "File_date: " + file.lastModified()
+									 + "\n");
+							
+							liste_.add(file);
+							
 						}
 
 					}
@@ -109,5 +124,10 @@ public void StopNote(){
 			}
 		}
 	}
+	
+//	private void sort_by_date() {
+//		Collections.sort(liste_, new Comparator<File>() {
+//		})
+//	}
 
 }

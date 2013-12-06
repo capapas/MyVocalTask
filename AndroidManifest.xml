@@ -23,7 +23,7 @@
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@drawable/mic_back"
-        android:label="Enregistement..."
+        android:label="Mon Dictaphone"
         android:theme="@style/AppTheme" >
         <activity
             android:name="fr.esgi.my_vocal_task.My_Recorder"
