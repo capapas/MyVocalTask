@@ -29,7 +29,7 @@ import android.media.MediaRecorder;
 public class My_Recorder extends Activity {
 	private int cmpt = 0;
 	private Chronometer time_;
-	private SeekBar progress_;
+//	private SeekBar progress_;
 	Button start_record;
 	// Button redirige;
 	Button save_record;
@@ -128,8 +128,8 @@ public class My_Recorder extends Activity {
 					
 						String chronoText = time_.getText().toString();
 						String array[] = chronoText.split(":");
-						cmpt = cmpt + Integer.parseInt(array[1]);
-						progress_.setProgress(cmpt / 60);
+					//	cmpt = cmpt + Integer.parseInt(array[1]);
+					//	progress_.setProgress(cmpt / 60);
 					
 					}
 				});
@@ -162,7 +162,7 @@ public class My_Recorder extends Activity {
 			time_.stop();
 			recorder.reset();
 			recorder.release();
-			progress_.setProgress(0);
+		//	progress_.setProgress(0);
 			cmpt = 0;
 			time_.setBase(SystemClock.elapsedRealtime());
 			recorder = null;
