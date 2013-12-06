@@ -1,6 +1,6 @@
 package fr.esgi.my_vocal_task;
 
-import fr.esgi.record_me.R;
+import fr.esgi.my_vocal_task.R;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;

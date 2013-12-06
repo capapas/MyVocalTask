@@ -5,5 +5,16 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/action_sort_date"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_sort_date"
+        />
+    <item
+        android:id="@+id/action_sort_size"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_sort_size"/>
 
 </menu>
