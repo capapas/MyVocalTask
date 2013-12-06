@@ -38,6 +38,7 @@ public class FilesAdapter extends ArrayAdapter<File> {
 			viewHolder.filename = (TextView) v.findViewById(R.id.txt_filename);
 			viewHolder.filedate = (TextView) v.findViewById(R.id.txt_date);
 			viewHolder.filesize = (TextView) v.findViewById(R.id.txt_size);
+			viewHolder.fileduration = (TextView) v.findViewById(R.id.txt_duration);
 			v.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) v.getTag();
@@ -46,33 +47,34 @@ public class FilesAdapter extends ArrayAdapter<File> {
 		File file = data.get(position);
 		if (data != null) {
 
-			viewHolder.filename.setText(file.getName().substring(0, file.getName().lastIndexOf('.')));
-			
+			viewHolder.filename.setText(file.getName().substring(0,
+					file.getName().lastIndexOf('.')));
+
 			Date dateModified = new Date(file.lastModified());
 			SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
-	        String dateText = df2.format(dateModified);
-	        
-	        long fileSizeByte = file.length();
-	        double fileSize = 0.00;
-	        String textFileSize = "0o";
-	        if(fileSizeByte < 1024) {
-	        	textFileSize = fileSizeByte+"o";
-	        } else if (fileSizeByte < (1024*1024)) {
-				fileSize = fileSizeByte/1024;
-				textFileSize = fileSize+"Ko";
-			} else if (fileSizeByte < (1024*1024*1024)) {
-				fileSize = fileSizeByte/(1024*1024);
-				textFileSize = fileSize+"Mo";
+			String dateText = df2.format(dateModified);
+
+			long fileSizeByte = file.length();
+			double fileSize = 0.00;
+			String textFileSize = "0o";
+			if (fileSizeByte < 1024) {
+				textFileSize = fileSizeByte + "o";
+			} else if (fileSizeByte < (1024 * 1024)) {
+				fileSize = fileSizeByte / 1024;
+				textFileSize = fileSize + "Ko";
+			} else if (fileSizeByte < (1024 * 1024 * 1024)) {
+				fileSize = fileSizeByte / (1024 * 1024);
+				textFileSize = fileSize + "Mo";
 			}
-	        fileSize = fileSizeByte/(1024*1024);
-	        //textFileSize = fileSize < 1 ? (fileSize*1024)+"Ko" : fileSize+"Mo";
-			
-			viewHolder.filedate.setText("Modifi� le : " + dateText);
+			fileSize = fileSizeByte / (1024 * 1024);
+
+			viewHolder.filedate.setText("Modifié le : " + dateText);
 			viewHolder.filesize.setText(textFileSize);
+			viewHolder.fileduration.setText(Utils.formatFileDuration(Utils.getFileDuration(file)));
 		}
 		return v;
 	}
-	
+
 	@Override
 	public int getCount() {
 		return data.size();
@@ -82,8 +84,6 @@ public class FilesAdapter extends ArrayAdapter<File> {
 		TextView filename;
 		TextView filedate;
 		TextView filesize;
+		TextView fileduration;
 	}
-	
-	
-
 }
