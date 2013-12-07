@@ -43,7 +43,7 @@
             android:label="@string/title_activity_home" >
         </activity>
         <activity
-            android:name="fr.esgi.my_vocal_task.Media_Player"
+            android:name="fr.esgi.my_vocal_task.ShowOneNote"
             android:label="@string/title_activity_media__player" >
         </activity>
     </application>

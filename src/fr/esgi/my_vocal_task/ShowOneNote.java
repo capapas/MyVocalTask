@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class Media_Player extends Activity {
+public class ShowOneNote extends Activity {
 	private String path_note;
 	private MediaPlayer media=null;
 	
@@ -14,7 +14,7 @@ public class Media_Player extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_media__player);
+		setContentView(R.layout.activity_show_one_note);
 	}
 
 	@Override

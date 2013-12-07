@@ -87,7 +87,7 @@ public class Home extends Activity implements OnItemClickListener {
 	}
 
 	private void to_media_player() {
-		Intent i = new Intent(this, Media_Player.class);
+		Intent i = new Intent(this, ShowOneNote.class);
 		startActivity(i);
 	}
 
