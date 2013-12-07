@@ -14,7 +14,7 @@ public class Media_Player extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_media__player);
+		setContentView(R.layout.activity_modification_note);
 	}
 
 	@Override
