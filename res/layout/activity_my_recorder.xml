@@ -56,7 +56,6 @@
             <Button
                 android:id="@+id/btn_save"
                 android:layout_height="wrap_content"
-            
                 android:layout_weight="1"
                 android:background="@color/black"
                 android:enabled="false"
@@ -64,23 +63,49 @@
                 android:textColor="#FFF"
                 android:textSize="20sp" />
         </TableRow>
+        </TableLayout>
+    
+    
 
-        <TableRow
-            android:layout_marginTop="20dip"
-            android:gravity="center" >
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:content="@+id/content"
+        android:handle="@+id/handle" >
+
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/all"
+           
+             />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/back_i"
+            
+             >
 
             <Button
                 android:id="@+id/redirige"
                 style="@style/btnStyleOrange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_span="2"
-                android:background="@color/black"
-                android:onClick="red"
-                android:text="Liste des notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                 android:gravity="center"
+                android:enabled="true"
+                android:onClick="redirect"
+                android:paddingTop="20dip"
+                android:background="@drawable/lecteur"
                 android:textColor="#FFF"
                 android:textSize="25sp" />
-        </TableRow>
-    </TableLayout>
+
+        </LinearLayout>
+
+    </SlidingDrawer>
 
 </RelativeLayout>
