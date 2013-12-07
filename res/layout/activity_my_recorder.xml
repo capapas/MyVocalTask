@@ -11,21 +11,22 @@
     tools:context=".My_Recorder" >
 
     <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent" >
 
         <TableRow
             android:gravity="center"
             android:paddingTop="10dip" >
 
             <ImageView
+                android:contentDescription="@string/Description"
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/mic_back"
-                 android:layout_span="2"
-                 />
+                android:layout_span="2"
+                android:src="@drawable/mic_back" />
         </TableRow>
 
         <TableRow
@@ -37,11 +38,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="90dip"
+                android:layout_span="2"
                 android:textColor="#FFF"
                 android:textSize="30sp"
-                android:textStyle="bold" 
-                android:layout_span="2"
-                />
+                android:textStyle="bold" />
         </TableRow>
 
         <TableRow android:layout_marginTop="20dip" >
@@ -59,13 +59,11 @@
                 android:layout_weight="1"
                 android:background="@color/black"
                 android:enabled="false"
-                android:text="Terminé"
+                android:text="@string/Terminer"
                 android:textColor="#FFF"
                 android:textSize="20sp" />
         </TableRow>
-        </TableLayout>
-    
-    
+    </TableLayout>
 
     <SlidingDrawer
         android:id="@+id/slidingDrawer1"
@@ -79,33 +77,36 @@
             android:id="@+id/handle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/all"
-           
-             />
+            android:background="@drawable/all" />
 
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/back_i"
-            
-             >
-
+            android:background="@color/black"
+            android:gravity="center" >
+          <TextView
+        android:id="@+id/textView1"
+        android:textColor="#FFF"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consulter"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
             <Button
                 android:id="@+id/redirige"
                 style="@style/btnStyleOrange"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                 android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/diffusion"
                 android:enabled="true"
                 android:onClick="redirect"
                 android:paddingTop="20dip"
-                android:background="@drawable/lecteur"
                 android:textColor="#FFF"
                 android:textSize="25sp" />
-
         </LinearLayout>
-
     </SlidingDrawer>
+
+
 
 </RelativeLayout>

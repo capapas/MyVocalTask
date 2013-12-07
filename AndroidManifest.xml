@@ -12,13 +12,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
- <supports-screens android:resizeable="true"
-                  android:smallScreens="true"
-                  android:normalScreens="true"
-                  android:largeScreens="true"
-                  android:xlargeScreens="true"
-                  android:anyDensity="true" 
-                 />
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
         android:allowBackup="true"
@@ -46,6 +46,10 @@
         <activity
             android:name="fr.esgi.my_vocal_task.Media_Player"
             android:label="@string/title_activity_media__player" >
+        </activity>
+        <activity
+            android:name="fr.esgi.my_vocal_task.MainActivity_mediapl"
+            android:label="@string/title_activity_main_activity_mediapl" >
         </activity>
     </application>
 
