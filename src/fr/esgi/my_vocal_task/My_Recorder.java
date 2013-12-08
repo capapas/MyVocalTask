@@ -50,6 +50,7 @@ public class My_Recorder extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_recorder);
+	
 	//	progress_ = (SeekBar) findViewById(R.id.progress_);
 		time_ = (Chronometer) findViewById(R.id.time_);
 		start_record = (Button) findViewById(R.id.btn_start);
