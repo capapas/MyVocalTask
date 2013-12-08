@@ -49,4 +49,14 @@
         android:textColorHighlight="#050505"
         android:layout_alignParentRight="true"
         android:id="@+id/txt_size" />
+        
+<!-- File duration-->
+        <TextView android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_size"
+        android:paddingTop="5dip"
+        android:paddingLeft="2dip"
+        android:textColor="#fafafa"
+        android:textColorHighlight="#050505"
+        android:id="@+id/txt_duration" />
 </RelativeLayout>
