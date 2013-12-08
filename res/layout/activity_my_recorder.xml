@@ -30,7 +30,7 @@
         </TableRow>
 
         <TableRow
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="50dip"
             android:gravity="center" >
 
             <Chronometer
@@ -44,7 +44,7 @@
                 android:textStyle="bold" />
         </TableRow>
 
-        <TableRow android:layout_marginTop="20dip" >
+        <TableRow android:layout_marginTop="50dip" >
 
             <Button
                 android:id="@+id/btn_start"
