@@ -196,7 +196,7 @@ public class Home extends Activity implements OnItemClickListener {
 				} else {
 					return rhs.getName().compareTo(lhs.getName());
 				}
-			}
+			} 
 		});
 		order_name_asc = !order_name_asc;
 		fa.notifyDataSetChanged();
