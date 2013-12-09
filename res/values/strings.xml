@@ -5,6 +5,8 @@
     <string name="action_settings">Paramètres</string>
     <string name="action_sort_date">Trier par date</string>
     <string name="action_sort_size">Trier par taille</string>
+    <string name="action_sort_duration">Trier par durée</string>
+    <string name="action_sort_name">Trier par nom</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_home">Notes enregistrées</string>
     <string name="title_activity_media__player">Media_Player</string>

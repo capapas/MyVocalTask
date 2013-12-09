@@ -31,6 +31,8 @@ public class Home extends Activity implements OnItemClickListener {
 	private static final String AUDIO_RECORDER_FOLDER = "MonDictaphone";
 	private boolean order_date_asc = false;
 	private boolean order_size_asc = false;
+	private boolean order_duration_asc = false;
+	private boolean order_name_asc = false;
 
 	// TODO Constructeur d'inisialisation
 
@@ -57,6 +59,14 @@ public class Home extends Activity implements OnItemClickListener {
 		case R.id.action_sort_size:
 			sort_by_size();
 			Log.e("itemSelected", "Trier par taille");
+			return true;
+		case R.id.action_sort_duration:
+			sort_by_duration();
+			Log.e("itemSelected", "Trier par durée");
+			return true;
+		case R.id.action_sort_name:
+			sort_by_name();
+			Log.e("itemSelected", "Trier par nom");
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -157,6 +167,38 @@ public class Home extends Activity implements OnItemClickListener {
 			}
 		});
 		order_size_asc = !order_size_asc;
+		fa.notifyDataSetChanged();
+	}
+	
+	private void sort_by_duration() {
+		Collections.sort(liste_, new Comparator<File>() {
+
+			@Override
+			public int compare(File lhs, File rhs) {
+				if (order_duration_asc) {
+					return (int) (Utils.getFileDuration(lhs) - Utils.getFileDuration(rhs));
+				} else {
+					return (int) (Utils.getFileDuration(rhs) - Utils.getFileDuration(lhs));
+				}
+			}
+		});
+		order_duration_asc = !order_duration_asc;
+		fa.notifyDataSetChanged();
+	}
+	
+	private void sort_by_name() {
+		Collections.sort(liste_, new Comparator<File>() {
+
+			@Override
+			public int compare(File lhs, File rhs) {
+				if (order_name_asc) {
+					return (lhs.getName().compareTo(rhs.getName()));
+				} else {
+					return rhs.getName().compareTo(lhs.getName());
+				}
+			}
+		});
+		order_name_asc = !order_name_asc;
 		fa.notifyDataSetChanged();
 	}
 }
