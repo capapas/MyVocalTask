@@ -16,6 +16,7 @@
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
+        android:resizeable="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
@@ -45,6 +46,10 @@
         <activity
             android:name="fr.esgi.my_vocal_task.ShowOneNote"
             android:label="@string/title_activity_media__player" >
+        </activity>
+        <activity
+            android:name="fr.esgi.my_vocal_task.MainActivity_mediapl"
+            android:label="@string/title_activity_main_activity_mediapl" >
         </activity>
     </application>
 

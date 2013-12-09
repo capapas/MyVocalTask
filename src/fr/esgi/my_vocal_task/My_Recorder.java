@@ -30,7 +30,7 @@ public class My_Recorder extends Activity {
 	private Chronometer time_;
 //	private SeekBar progress_;
 	Button start_record;
-	// Button redirige;
+	Button redirige;
 	Button save_record;
 	AlertDialog message;
 	String date_sys;
@@ -50,11 +50,12 @@ public class My_Recorder extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_recorder);
+	
 	//	progress_ = (SeekBar) findViewById(R.id.progress_);
 		time_ = (Chronometer) findViewById(R.id.time_);
 		start_record = (Button) findViewById(R.id.btn_start);
 		save_record = (Button) findViewById(R.id.btn_save);
-
+        redirige=(Button) findViewById(R.id.redirige);
 		start_record.setOnClickListener(action_start);
 		save_record.setOnClickListener(action_stop);
 		message = new AlertDialog.Builder(this).create();
@@ -90,6 +91,7 @@ public class My_Recorder extends Activity {
 	}
 
 	private void startRecording() {
+		redirige.setEnabled(false);
 		recorder = new MediaRecorder();
 
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -172,7 +174,7 @@ private void pauseRecording(){
 			recorder.reset();
 			recorder.release();
 		//	progress_.setProgress(0);
-	
+	        redirige.setEnabled(true);
 			time_.setBase(SystemClock.elapsedRealtime());
 			recorder = null;
 		}
@@ -214,33 +216,14 @@ private void Save_My_Note(){
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(this);
 		alert.setView(input);
-		
-		
 		alert
-		.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-			File out_cancel=null;
-		 	String filepath = Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER;
-			File file = new File(filepath+"/"+date_sys+file_exts[currentFormat]);
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
-			
-				out_cancel=new File(filepath+"/"+System.currentTimeMillis()+file_exts[currentFormat]);
-
-				if(file.exists()){
-					
-					file.renameTo(out_cancel);
-					save_record.setEnabled(false);
-				}
-			}
-		})
 		.setPositiveButton("Save",new  DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 //				System.currentTimeMillis()
-				if(!input.getText().toString().matches("^[-a-zA-Z0-9._]+")){
+				if(!input.getText().toString().matches("^[-a-zA-Z0-9._@]+")){
 					Save_My_Note();
 				}
 		   	String filepath = Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER;
@@ -266,6 +249,26 @@ private void Save_My_Note(){
 				}
 			}
 		});
+		
+		alert
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			File out_cancel=null;
+		 	String filepath = Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER;
+			File file = new File(filepath+"/"+date_sys+file_exts[currentFormat]);
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				// TODO Auto-generated method stub
+			
+				out_cancel=new File(filepath+"/"+System.currentTimeMillis()+file_exts[currentFormat]);
+
+				if(file.exists()){
+					
+					file.renameTo(out_cancel);
+					save_record.setEnabled(false);
+				}
+			}
+		});
+
 	
 		alert.show(); 
          
@@ -275,7 +278,7 @@ private void Save_My_Note(){
 
 	// TODO Redirige
 
-	public void red(View v) {
+	public void redirect(View v) {
 		// TODO Auto-generated method stub
 		Intent i = new Intent(this, Home.class);
 		startActivity(i);
