@@ -48,5 +48,16 @@ public class Utils {
 
 		return sdf.format(date);
 	}
+	
+	public static String noteName(File file) {
+		return file.getName().substring(0,
+				file.getName().lastIndexOf('.'));
+	}
+	
+	public static String getLastModificationDate(File file) {
+		Date dateModified = new Date(file.lastModified());
+		SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
+		return df2.format(dateModified);
+	}
 
 }

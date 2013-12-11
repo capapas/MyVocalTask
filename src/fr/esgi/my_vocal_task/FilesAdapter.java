@@ -47,12 +47,9 @@ public class FilesAdapter extends ArrayAdapter<File> {
 		File file = data.get(position);
 		if (data != null) {
 
-			viewHolder.filename.setText(file.getName().substring(0,
-					file.getName().lastIndexOf('.')));
+			viewHolder.filename.setText(Utils.noteName(file));
 
-			Date dateModified = new Date(file.lastModified());
-			SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
-			String dateText = df2.format(dateModified);
+			String dateText = Utils.getLastModificationDate(file);
 
 			long fileSizeByte = file.length();
 			double fileSize = 0.00;
