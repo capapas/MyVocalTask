@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
         android:layout_marginBottom="20dp"
-        android:text="Date de création"
+        android:layout_marginTop="80dp"
+        android:text="Date de modification"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
 
@@ -40,7 +40,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/noteName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -137,7 +137,7 @@
     </MediaController>
 
     <TextView
-        android:id="@+id/creationDate"
+        android:id="@+id/modificationDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView1"

@@ -7,7 +7,10 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
 import android.view.Menu;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class ShowOneNote extends Activity {
 	private String path_note;
@@ -23,6 +26,11 @@ public class ShowOneNote extends Activity {
 		this.path_note = param.getParcelable("note");
 		this.note = new File(this.path_note);
 		
+		String noteName = Utils.noteName(this.note);
+		String lastModificationDate = Utils.getLastModificationDate(this.note);
+		
+		((EditText) findViewById(R.id.noteName)).setText(noteName);
+		((TextView) findViewById(R.id.modificationDate)).setText(lastModificationDate);
 	}
 
 	@Override
