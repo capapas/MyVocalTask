@@ -34,7 +34,7 @@ public class Home extends Activity implements OnItemClickListener {
 	private boolean order_duration_asc = false;
 	private boolean order_name_asc = false;
 
-	// TODO Constructeur d'inisialisation
+	// TODO Constructeur d'initialisation
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
