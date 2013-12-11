@@ -13,6 +13,24 @@ public class Utils {
 
 	static MediaPlayer mediaPlayer = new MediaPlayer();
 
+	public static MediaPlayer  getMediaPlayer(File file) {
+		try {
+			mediaPlayer.setDataSource(file.getAbsolutePath());
+			mediaPlayer.prepare();
+			return mediaPlayer;
+			
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static long getFileDuration(File file) {
 		try {
 			mediaPlayer.setDataSource(file.getAbsolutePath());
