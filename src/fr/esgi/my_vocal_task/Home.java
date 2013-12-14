@@ -89,16 +89,17 @@ public class Home extends Activity implements OnItemClickListener {
 		// public static MediaPlayer create (Context context, int resid)
 		// StopNote();
 		// PlayNote(path_note);
-		to_media_player();
+		to_show_one_note(path_note);
 		// message=new AlertDialog.Builder(this).create();
 		// message.setTitle("File");
 		// message.setMessage(name_file+"");
 		// message.show();
 	}
 
-	private void to_media_player() {
-		Intent i = new Intent(this, ShowOneNote.class);
-		startActivity(i);
+	private void to_show_one_note(String file) {
+		Intent intent = new Intent(this, ShowOneNote.class);
+		intent.putExtra("note", file);
+		startActivity(intent);
 	}
 
 	@Override

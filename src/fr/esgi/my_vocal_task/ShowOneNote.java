@@ -1,20 +1,79 @@
 package fr.esgi.my_vocal_task;
 
-import fr.esgi.my_vocal_task.R;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
+import java.io.File;
+import java.io.IOException;
 
-public class ShowOneNote extends Activity {
+import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
+
+public class ShowOneNote extends Activity implements OnSeekBarChangeListener {
 	private String path_note;
-	private MediaPlayer media=null;
-	
-//private Home my_note=new Home(media,path_note);
+	private File note;
+	private MediaPlayer media = null;
+	private int seekForwardTime = 5000;
+    private int seekBackwardTime = 5000;
+    private SeekBar seekBar;
+    private TextView totalDuration;
+    private TextView currentDuration;
+    private Handler mHandler = new Handler();
+    private Button btnPlay;
+
+	// private Home my_note=new Home(media,path_note);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_one_note);
+		Bundle param = this.getIntent().getExtras();
+		this.path_note = param.getParcelable("note");
+		this.note = new File(this.path_note);
+		this.media = Utils.getMediaPlayer(this.note);
+		
+		seekBar.setOnSeekBarChangeListener(this); // Important
+		
+		String noteName = Utils.noteName(this.note);
+		String lastModificationDate = Utils.getLastModificationDate(this.note);
+	
+		((EditText) findViewById(R.id.noteName)).setText(noteName);
+		((TextView) findViewById(R.id.modificationDate)).setText(lastModificationDate);
+		this.seekBar = (SeekBar) findViewById(R.id.seekBar1);
+		this.totalDuration = (TextView) findViewById(R.id.duration);
+		this.currentDuration = (TextView) findViewById(R.id.currentTime);
+		this.btnPlay = (Button) findViewById(R.id.play);
+		
+		
+		btnPlay.setOnClickListener(new View.OnClickListener() {
+			 
+            @Override
+            public void onClick(View arg0) {
+                // check for already playing
+                if(media.isPlaying()){
+                    if(media!=null){
+                        media.pause();
+                        // Changing button image to play button
+                        btnPlay.setBackgroundResource(R.drawable.play);
+                    }
+                }else{
+                    // Resume song
+                    if(media!=null){
+                        media.start();
+                        // Changing button image to pause button
+                        btnPlay.setBackgroundResource(R.drawable.pause_);
+                    }
+                }
+ 
+            }
+        });
 	}
 
 	@Override
@@ -23,16 +82,101 @@ public class ShowOneNote extends Activity {
 		getMenuInflater().inflate(R.menu.media__player, menu);
 		return true;
 	}
-public void play(){
+
+	public void  playSong(int songIndex){
+        // Play song
+        try {
+            this.media.reset();
+            
+            this.media.prepare();
+            this.media.start();
+            // Displaying Song title
+            
+ 
+            // Changing Button Image to pause image
+            this.btnPlay.setBackgroundResource(R.drawable.pause_);
+ 
+            // set Progress bar values
+            this.seekBar.setProgress(0);
+            this.seekBar.setMax(100);
+ 
+            // Updating progress bar
+            updateProgressBar();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+	public void stop() {
+		// my_note.StopNote();
+
+	}
+
+	public void pause() {
+		this.media.pause();
+	}
 	
-	//my_note.PlayNote(path_note);
-}
-public void stop(){
-	//my_note.StopNote();
+	public void remove_note(){
+		try{
+			this.media.reset();
+			this.note.delete();
+			Intent intent = new Intent(this, Home.class);
+			startActivity(intent);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+	}
 	
-}
-public void pause(){
 	
-	
-}
+    public void updateProgressBar() {
+        this.mHandler.postDelayed(mUpdateTimeTask, 100);
+    }
+    
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
+ 
+    }
+    
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        // remove message Handler from updating progress bar
+        mHandler.removeCallbacks(mUpdateTimeTask);
+    }
+    
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        mHandler.removeCallbacks(mUpdateTimeTask);
+        int totalDuration = media.getDuration();
+        int currentPosition = Utils.progressToTimer(seekBar.getProgress(), totalDuration);
+ 
+        // forward or backward to certain seconds
+        media.seekTo(currentPosition);
+ 
+        // update timer progress again
+        updateProgressBar();
+    }
+    
+    private Runnable mUpdateTimeTask = new Runnable() {
+        public void run() {
+            long totalDurationLong = media.getDuration();
+            long currentDurationLong = media.getCurrentPosition();
+
+            // Displaying Total Duration time
+            totalDuration.setText("" + Utils.milliSecondsToTimer(totalDurationLong));
+            // Displaying time completed playing
+            currentDuration.setText("" + Utils.milliSecondsToTimer(currentDurationLong));
+
+            // Updating progress bar
+            int progress = (int)(Utils.getProgressPercentage(currentDurationLong, totalDurationLong));
+            //Log.d("Progress", ""+progress);
+            seekBar.setProgress(progress);
+
+            // Running this thread after 100 milliseconds
+            mHandler.postDelayed(this, 100);
+        }
+     };
 }

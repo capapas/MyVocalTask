@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
         android:layout_marginBottom="20dp"
-        android:text="Date de création"
+        android:layout_marginTop="80dp"
+        android:text="Date de modification"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
 
@@ -40,7 +40,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/noteName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -80,23 +80,23 @@
         android:onClick="play" />
 
     <Button
-        android:id="@+id/pause"
-        android:layout_gravity="left"
+        android:id="@+id/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/play"
         android:layout_alignBottom="@+id/play"
+        android:layout_gravity="left"
         android:layout_marginLeft="80dp"
         android:layout_toRightOf="@+id/play"
-        android:background="@drawable/pause_"
+        android:background="@drawable/stop__"
         android:onClick="pause" />
 
     <TextView
         android:id="@+id/currentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/pause"
-        android:layout_alignBottom="@+id/pause"
+        android:layout_alignBaseline="@+id/stop"
+        android:layout_alignBottom="@+id/stop"
         android:layout_marginRight="70dp"
         android:layout_toLeftOf="@+id/duration"
         android:layout_gravity="right"
@@ -137,7 +137,7 @@
     </MediaController>
 
     <TextView
-        android:id="@+id/creationDate"
+        android:id="@+id/modificationDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView1"
