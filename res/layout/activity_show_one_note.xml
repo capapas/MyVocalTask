@@ -80,23 +80,23 @@
         android:onClick="play" />
 
     <Button
-        android:id="@+id/pause"
-        android:layout_gravity="left"
+        android:id="@+id/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/play"
         android:layout_alignBottom="@+id/play"
+        android:layout_gravity="left"
         android:layout_marginLeft="80dp"
         android:layout_toRightOf="@+id/play"
-        android:background="@drawable/pause_"
+        android:background="@drawable/stop__"
         android:onClick="pause" />
 
     <TextView
         android:id="@+id/currentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/pause"
-        android:layout_alignBottom="@+id/pause"
+        android:layout_alignBaseline="@+id/stop"
+        android:layout_alignBottom="@+id/stop"
         android:layout_marginRight="70dp"
         android:layout_toLeftOf="@+id/duration"
         android:layout_gravity="right"
