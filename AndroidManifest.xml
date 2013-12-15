@@ -29,11 +29,7 @@
         <activity
             android:name="fr.esgi.my_vocal_task.My_Recorder"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         <activity
             android:name="fr.esgi.my_vocal_task.SettingsActivity"
@@ -42,6 +38,10 @@
         <activity
             android:name="fr.esgi.my_vocal_task.Home"
             android:label="@string/title_activity_home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="fr.esgi.my_vocal_task.ShowOneNote"
