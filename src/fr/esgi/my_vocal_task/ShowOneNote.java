@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +18,10 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-public class ShowOneNote extends Activity implements OnSeekBarChangeListener {
+public class ShowOneNote extends Activity implements OnCompletionListener, OnSeekBarChangeListener {
 	private String path_note;
 	private File note;
 	private MediaPlayer media = null;
-	private int seekForwardTime = 5000;
-    private int seekBackwardTime = 5000;
     private SeekBar seekBar;
     private TextView totalDuration;
     private TextView currentDuration;
@@ -34,23 +33,30 @@ public class ShowOneNote extends Activity implements OnSeekBarChangeListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_one_note);
-		Bundle param = this.getIntent().getExtras();
-		this.path_note = param.getParcelable("note");
+		
+		Bundle param = getIntent().getExtras();
+		if(param !=null) {
+		    this.path_note = param.getString("NOTE");
+		}
+
+		Log.e("pathNote" , "pathNote " + this.path_note);
+		
 		this.note = new File(this.path_note);
 		this.media = Utils.getMediaPlayer(this.note);
 		
-		seekBar.setOnSeekBarChangeListener(this); // Important
-		
-		String noteName = Utils.noteName(this.note);
-		String lastModificationDate = Utils.getLastModificationDate(this.note);
-	
-		((EditText) findViewById(R.id.noteName)).setText(noteName);
-		((TextView) findViewById(R.id.modificationDate)).setText(lastModificationDate);
 		this.seekBar = (SeekBar) findViewById(R.id.seekBar1);
 		this.totalDuration = (TextView) findViewById(R.id.duration);
 		this.currentDuration = (TextView) findViewById(R.id.currentTime);
 		this.btnPlay = (Button) findViewById(R.id.play);
 		
+		this.seekBar.setOnSeekBarChangeListener(this); // Important
+		this.media.setOnCompletionListener(this);
+		
+		String noteName = Utils.noteName(this.note);
+		String lastModificationDate = Utils.getLastModificationDate(this.note);
+		
+		((EditText) findViewById(R.id.noteName)).setText(noteName);
+		((TextView) findViewById(R.id.modificationDate)).setText(lastModificationDate);
 		
 		btnPlay.setOnClickListener(new View.OnClickListener() {
 			 
@@ -83,7 +89,7 @@ public class ShowOneNote extends Activity implements OnSeekBarChangeListener {
 		return true;
 	}
 
-	public void  playSong(int songIndex){
+	public void  playSong(){
         // Play song
         try {
             this.media.reset();
@@ -101,7 +107,7 @@ public class ShowOneNote extends Activity implements OnSeekBarChangeListener {
             this.seekBar.setMax(100);
  
             // Updating progress bar
-            updateProgressBar();
+            this.updateProgressBar();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (IllegalStateException e) {
@@ -158,6 +164,11 @@ public class ShowOneNote extends Activity implements OnSeekBarChangeListener {
  
         // update timer progress again
         updateProgressBar();
+    }
+    
+    @Override
+    public void onCompletion(MediaPlayer arg0) {
+        this.playSong();
     }
     
     private Runnable mUpdateTimeTask = new Runnable() {

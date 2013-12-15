@@ -97,8 +97,9 @@ public class Home extends Activity implements OnItemClickListener {
 	}
 
 	private void to_show_one_note(String file) {
+		
 		Intent intent = new Intent(this, ShowOneNote.class);
-		intent.putExtra("note", file);
+		intent.putExtra("NOTE", file + ".mp4");
 		startActivity(intent);
 	}
 
