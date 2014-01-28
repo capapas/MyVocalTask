@@ -16,8 +16,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Supprimer"
-        android:textColor="#ffffff" />
+        android:text="@string/delete_note"
+        android:textColor="#ffffff"
+        android:onClick="remove_note"
+        tools:context=".ShowOneNote" />
 
     <TextView
         android:id="@+id/textView1"

@@ -52,6 +52,10 @@ public class Home extends Activity implements OnItemClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
+		case R.id.action_add:
+			go_to_my_recorder();
+			Log.e("actionSelected", "Ajouter une note");
+			return true;
 		case R.id.action_sort_date:
 			sort_by_date();
 			Log.e("itemSelected", "Trier par date");
@@ -108,6 +112,12 @@ public class Home extends Activity implements OnItemClickListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
+	}
+	
+	private void go_to_my_recorder() {
+		
+		Intent intent = new Intent(this, My_Recorder.class);
+		startActivity(intent);
 	}
 
 	private void getAllFilesOfDir(File directory) {

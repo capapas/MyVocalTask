@@ -126,7 +126,7 @@ public class ShowOneNote extends Activity implements OnCompletionListener, OnSee
 		this.media.pause();
 	}
 	
-	public void remove_note(){
+	public void remove_note(View v){
 		try{
 			this.media.reset();
 			this.note.delete();

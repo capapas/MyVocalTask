@@ -3,6 +3,7 @@
 
     <string name="app_name">MyVocalTask</string>
     <string name="action_settings">Paramètres</string>
+    <string name="action_add">+</string>
     <string name="action_sort_date">Trier par date</string>
     <string name="action_sort_size">Trier par taille</string>
     <string name="action_sort_duration">Trier par durée</string>
@@ -15,6 +16,8 @@
 
     <string name="title_activity_main_activity_mediapl">MainActivity_mediapl</string>
     <string name="consulter">Consulter la listes des notes</string>
-    <string name="Terminer">Terminé</string>
+    <string name="Terminer">Terminer</string>
     <string name="Description">Recorder</string>
+    <string name="delete_note">Supprimer</string>
+    
 </resources>
