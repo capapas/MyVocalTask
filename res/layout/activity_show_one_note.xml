@@ -29,7 +29,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="80dp"
-        android:text="Date de modification"
+        android:text="@string/edit_date"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
 
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView1"
-        android:text="-"
+        android:text="@string/separator"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -48,7 +48,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:text="Note name"
+        android:text="@string/note_name"
         android:textColor="#ffffff"
         android:textSize="30sp" />
 
@@ -59,8 +59,10 @@
         android:layout_above="@+id/button2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Modifier"
-        android:textColor="#ffffff" />
+        android:text="@string/edit_note"
+        android:onClick="update_note"
+        android:textColor="#ffffff" 
+    />
     
     <MediaController
         android:id="@+id/mediaController1"
@@ -102,7 +104,7 @@
         android:layout_marginRight="70dp"
         android:layout_toLeftOf="@+id/duration"
         android:layout_gravity="right"
-        android:text="00:00"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff" />
 
@@ -115,7 +117,7 @@
         android:layout_alignRight="@+id/duration"
         android:layout_marginRight="58dp"
         android:layout_gravity="right"
-        android:text="/"
+        android:text="@string/separator2"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff" />
 
@@ -132,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="00:00"
+        android:text="@string/default_time"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff" />
         
@@ -145,7 +147,7 @@
         android:layout_alignBaseline="@+id/textView1"
         android:layout_alignBottom="@+id/textView1"
         android:layout_alignParentRight="true"
-        android:text="-"
+        android:text="@string/separator"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
 

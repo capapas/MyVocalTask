@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,10 +78,29 @@ public class ShowOneNote extends Activity implements OnCompletionListener, OnSee
                         btnPlay.setBackgroundResource(R.drawable.pause_);
                     }
                 }
- 
             }
         });
 	}
+	
+	// Cette fonction appelle les traitements associées au menu en haut
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			// Handle presses on the action bar items
+			switch (item.getItemId()) {
+			case R.id.action_list:
+				go_to_list_view();
+				Log.e("actionSelected", "Voir la liste des notes");
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+			}
+		}
+		
+		private void go_to_list_view() {
+			
+			Intent intent = new Intent(this, Home.class);
+			startActivity(intent);
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -89,16 +109,14 @@ public class ShowOneNote extends Activity implements OnCompletionListener, OnSee
 		return true;
 	}
 
-	public void  playSong(){
+	public void playSong(){
         // Play song
         try {
             this.media.reset();
             
             this.media.prepare();
             this.media.start();
-            // Displaying Song title
-            
- 
+
             // Changing Button Image to pause image
             this.btnPlay.setBackgroundResource(R.drawable.pause_);
  
@@ -135,6 +153,17 @@ public class ShowOneNote extends Activity implements OnCompletionListener, OnSee
     	}catch(Exception e){
     		e.printStackTrace();
     	}
+	}
+	
+	public void update_note(View v) {
+		EditText newName = (EditText)findViewById(R.id.noteName);
+
+		Log.e("newName" , note.getParent() +  '/' + newName.getText().toString());
+
+		this.note.renameTo( new File(note.getParent() +  '/' + newName.getText().toString() + ".mp4") );
+		this.media.reset();
+		Intent intent = new Intent(this, Home.class);
+		startActivity(intent);
 	}
 	
 	
