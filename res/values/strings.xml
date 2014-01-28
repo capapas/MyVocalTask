@@ -8,14 +8,13 @@
     <string name="action_sort_size">Trier par taille</string>
     <string name="action_sort_duration">Trier par durée</string>
     <string name="action_sort_name">Trier par nom</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_home">Notes enregistrées</string>
     <string name="title_activity_media__player">Media_Player</string>
 
     <color name="black">#000000</color>
 
     <string name="title_activity_main_activity_mediapl">MainActivity_mediapl</string>
-    <string name="consulter">Consulter la listes des notes</string>
+    <string name="consulter">Notes</string>
     <string name="Terminer">Terminer</string>
     <string name="Description">Recorder</string>
     <string name="delete_note">Supprimer</string>
