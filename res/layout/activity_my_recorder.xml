@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
+
     android:background="@color/black"
     android:fillViewport="true"
-    android:gravity="center"
+   
     android:orientation="vertical"
     tools:context=".My_Recorder" >
 
     <TableLayout
-        android:layout_width="match_parent"
+         android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <TableRow
@@ -24,7 +25,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/Description"
-                android:src="@drawable/mic_back" />
+                android:src="@drawable/mic_back"
+                
+                 />
         </TableRow>
 
         <TableRow
@@ -49,13 +52,15 @@
 
             <Button
                 android:id="@+id/btn_start"
-                android:layout_width="30dp"
-                android:layout_height="90dp"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/start" />
+                android:background="@drawable/start" 
+                
+                />
         </TableRow>
 
         <TableRow
@@ -65,12 +70,14 @@
 
             <Button
                 android:id="@+id/btn_save"
-                android:enabled="true"
-                android:gravity="center"
+                android:enabled="false"    
                 android:paddingTop="20dip"
                 android:text="@string/Terminer"
                 android:textColor="#FFF"
-                android:textSize="25sp" />
+                android:textSize="25sp" 
+               
+                />
+            
         </TableRow>
 
         <TableRow
@@ -79,7 +86,7 @@
 
             <Button
                 android:id="@+id/redirige"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:enabled="true"
                 android:gravity="center"
@@ -87,7 +94,9 @@
                 android:paddingTop="20dip"
                 android:text="@string/consulter"
                 android:textColor="#FFF"
+               
                 android:textSize="25sp" />
+            
         </TableRow>
     </TableLayout>
 
