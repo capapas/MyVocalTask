@@ -2,7 +2,7 @@ package fr.esgi.my_vocal_task;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
+//import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,8 +21,8 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Chronometer.OnChronometerTickListener;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+//import android.widget.ProgressBar;
+//import android.widget.Toast;
 import android.media.MediaRecorder;
 
 public class My_Recorder extends Activity {
@@ -154,18 +154,7 @@ public class My_Recorder extends Activity {
 
 		}
 	};
-private void pauseRecording(){
-	if(null !=recorder){
-		
-		try {
-			this.recorder.wait(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-}
+
 	private void stopRecording() {
 		if (null != recorder) {
 			
