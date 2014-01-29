@@ -82,6 +82,12 @@ public class ShowOneNote extends Activity implements OnCompletionListener, OnSee
         });
 	}
 	
+	@Override
+     	public void onDestroy(){
+	    super.onDestroy();
+	    this.media.release();
+     	}
+	
 	// Cette fonction appelle les traitements associées au menu en haut
 		@Override
 		public boolean onOptionsItemSelected(MenuItem item) {
