@@ -28,7 +28,6 @@ import android.media.MediaRecorder;
 public class My_Recorder extends Activity {
 
 	private Chronometer time_;
-//	private SeekBar progress_;
 	Button start_record;
 	Button redirige;
 	Button save_record;
@@ -50,44 +49,27 @@ public class My_Recorder extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_recorder);
-	
-	//	progress_ = (SeekBar) findViewById(R.id.progress_);
+
 		time_ = (Chronometer) findViewById(R.id.time_);
 		start_record = (Button) findViewById(R.id.btn_start);
 		save_record = (Button) findViewById(R.id.btn_save);
-        redirige=(Button) findViewById(R.id.redirige);
+		redirige = (Button) findViewById(R.id.redirige);
 		start_record.setOnClickListener(action_start);
 		save_record.setOnClickListener(action_stop);
 		message = new AlertDialog.Builder(this).create();
 
 	}
 
-/*	private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
-		@Override
-		public void onError(MediaRecorder mr, int what, int extra) {
-			Toast.makeText(My_Recorder.this, "Error: " + what + ", " + extra,
-					Toast.LENGTH_SHORT).show();
-		}
-	};
-
-	private MediaRecorder.OnInfoListener infoListener = new MediaRecorder.OnInfoListener() {
-		@Override
-		public void onInfo(MediaRecorder mr, int what, int extra) {
-			Toast.makeText(My_Recorder.this,
-					"Warning: " + what + ", " + extra, Toast.LENGTH_SHORT)
-					.show();
-		}
-	};
-*/
 	private String getFilename() {
 		String filepath = Environment.getExternalStorageDirectory().getPath();
 		File file = new File(filepath, AUDIO_RECORDER_FOLDER);
-		 date_sys = new SimpleDateFormat("ddMMyyyy").format(Calendar.getInstance().getTime());
+		date_sys = new SimpleDateFormat("ddMMyyyy").format(Calendar
+				.getInstance().getTime());
 		if (!file.exists()) {
 			file.mkdirs();
 		}
 
-		return (file.getAbsolutePath() + "/" + date_sys+ file_exts[currentFormat]);
+		return (file.getAbsolutePath() + "/" + date_sys + file_exts[currentFormat]);
 	}
 
 	private void startRecording() {
@@ -98,9 +80,6 @@ public class My_Recorder extends Activity {
 		recorder.setOutputFormat(output_formats[currentFormat]);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 		recorder.setOutputFile(getFilename());
-
-		//recorder.setOnErrorListener(errorListener);
-		//recorder.setOnInfoListener(infoListener);
 
 		try {
 			recorder.prepare();
@@ -117,53 +96,39 @@ public class My_Recorder extends Activity {
 		@Override
 		public void onClick(View v) {
 
-			// TODO Auto-generated method stub
 			if (enable == false) {
-				// TODO evenement TICK du chronometre
-				if(recorder==null){
-				startRecording();
-				
+				if (recorder == null) {
+					startRecording();
+
 				}
 				time_.setOnChronometerTickListener(new OnChronometerTickListener() {
 
 					@Override
 					public void onChronometerTick(Chronometer chronometer) {
-						// TODO Auto-generated method stub
-					
-					   
-					
+
 					}
 				});
-			
+
 				start_record.setBackgroundResource(R.drawable.stop);
 				time_.start();
 				enable = true;
 			} else {
 				save_record.setEnabled(true);
 				time_.stop();
-				///stopRecording();
 				start_record.setBackgroundResource(R.drawable.start);
 				enable = false;
 			}
-			// start_record.setEnabled(false);
-			// startRecording();
-			// message.setTitle("start");
-			// message.setMessage("Button start record.");
-			// message.show();
-			// recorder.setAudioEncoder(MediaRecorder.AudioSource.MIC);
-
 		}
 	};
 
 	private void stopRecording() {
 		if (null != recorder) {
-			
+
 			recorder.stop();
 			time_.stop();
 			recorder.reset();
 			recorder.release();
-		//	progress_.setProgress(0);
-	        redirige.setEnabled(true);
+			redirige.setEnabled(true);
 			time_.setBase(SystemClock.elapsedRealtime());
 			recorder = null;
 		}
@@ -173,19 +138,10 @@ public class My_Recorder extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
-	
 			stopRecording();
 			Save_My_Note();
 			start_record.setBackgroundResource(R.drawable.start);
-			
 
-			// start_record.setEnabled(true);
-			
-
-			// message.setTitle("stop");
-			// message.setMessage("Button stop record.");
-			// message.show();
 		}
 	};
 
@@ -195,83 +151,84 @@ public class My_Recorder extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-private void Save_My_Note(){
-		
+
+	private void Save_My_Note() {
+
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle("MonDictaphone");
 		alert.setMessage("Saisissez un nom pour votre note!");
 
-		// Set an EditText view to get user input 
+		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
 		alert.setView(input);
-		alert
-		.setPositiveButton("Save",new  DialogInterface.OnClickListener() {
-			
+		alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-//				System.currentTimeMillis()
-				if(!input.getText().toString().matches("^[-a-zA-Z0-9._@]+")){
+				if (!input.getText().toString().matches("^[-a-zA-Z0-9._@]+")) {
 					Save_My_Note();
 				}
-		   	String filepath = Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER;
-			   File out=null;
-			   if(input.getText().toString().trim().equals("")){
-				   out=new File(filepath+"/"+System.currentTimeMillis()+file_exts[currentFormat]);
-			   }
-			   else{
-				   
-					 out=new File(filepath+"/"+input.getText()+file_exts[currentFormat]); 
-				
-			   }
+				String filepath = Environment.getExternalStorageDirectory()
+						.getPath() + "/" + AUDIO_RECORDER_FOLDER;
+				File out = null;
+				if (input.getText().toString().trim().equals("")) {
+					out = new File(filepath + "/" + System.currentTimeMillis()
+							+ file_exts[currentFormat]);
+				} else {
 
-			   if(out.exists()){
-				   out=new File(filepath+"/"+input.getText()+"-"+System.currentTimeMillis()+file_exts[currentFormat]);
-			   }
-				File file = new File(filepath+"/"+date_sys+file_exts[currentFormat]);
-				
-				if(file.exists()){
-					
+					out = new File(filepath + "/" + input.getText()
+							+ file_exts[currentFormat]);
+
+				}
+
+				if (out.exists()) {
+					out = new File(filepath + "/" + input.getText() + "-"
+							+ System.currentTimeMillis()
+							+ file_exts[currentFormat]);
+				}
+				File file = new File(filepath + "/" + date_sys
+						+ file_exts[currentFormat]);
+
+				if (file.exists()) {
+
 					file.renameTo(out);
 					save_record.setEnabled(false);
 				}
 			}
 		});
-		
-		alert
-		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			File out_cancel=null;
-		 	String filepath = Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER;
-			File file = new File(filepath+"/"+date_sys+file_exts[currentFormat]);
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
-			
-				out_cancel=new File(filepath+"/"+System.currentTimeMillis()+file_exts[currentFormat]);
 
-				if(file.exists()){
-					
-					file.renameTo(out_cancel);
-					save_record.setEnabled(false);
-				}
-			}
-		});
+		alert.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					File out_cancel = null;
+					String filepath = Environment.getExternalStorageDirectory()
+							.getPath() + "/" + AUDIO_RECORDER_FOLDER;
+					File file = new File(filepath + "/" + date_sys
+							+ file_exts[currentFormat]);
 
-	
-		alert.show(); 
-         
-		
-          }	
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
 
+						out_cancel = new File(filepath + "/"
+								+ System.currentTimeMillis()
+								+ file_exts[currentFormat]);
 
-	// TODO Redirige
+						if (file.exists()) {
+
+							file.renameTo(out_cancel);
+							save_record.setEnabled(false);
+						}
+					}
+				});
+
+		alert.show();
+
+	}
 
 	public void redirect(View v) {
-		// TODO Auto-generated method stub
 		Intent i = new Intent(this, Home.class);
 		startActivity(i);
-		
+
 	}
 
 }

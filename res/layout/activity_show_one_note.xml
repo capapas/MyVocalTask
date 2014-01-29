@@ -93,7 +93,7 @@
         android:layout_marginLeft="80dp"
         android:layout_toRightOf="@+id/play"
         android:background="@drawable/stop__"
-        android:onClick="pause" />
+        android:onClick="stop" />
 
     <TextView
         android:id="@+id/currentTime"

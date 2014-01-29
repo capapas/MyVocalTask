@@ -87,7 +87,17 @@ public class ShowOneNote extends Activity implements OnCompletionListener,
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		this.mHandler.removeCallbacks(this.mUpdateTimeTask);
+		this.media.pause();
+		this.media.stop();
 		this.media.release();
+		this.finish();
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		this.finish();
 	}
 
 	// Cette fonction appelle les traitements associées au menu en haut
@@ -207,7 +217,7 @@ public class ShowOneNote extends Activity implements OnCompletionListener,
 
 	@Override
 	public void onCompletion(MediaPlayer arg0) {
-		this.playSong();
+		this.media.pause();
 	}
 
 	private Runnable mUpdateTimeTask = new Runnable() {

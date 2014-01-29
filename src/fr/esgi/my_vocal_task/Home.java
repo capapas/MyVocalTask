@@ -22,7 +22,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class Home extends Activity implements OnItemClickListener {
-	private File file;
 	private String path_note = "";
 	private ArrayList<File> liste_;
 	FilesAdapter fa;
@@ -33,8 +32,6 @@ public class Home extends Activity implements OnItemClickListener {
 	private boolean order_size_asc = false;
 	private boolean order_duration_asc = false;
 	private boolean order_name_asc = false;
-
-	// TODO Constructeur d'initialisation
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,18 +87,11 @@ public class Home extends Activity implements OnItemClickListener {
 		TextView path = (TextView) arg1.findViewById(R.id.txt_filename);
 		path_note = Environment.getExternalStorageDirectory() + "/"
 				+ AUDIO_RECORDER_FOLDER + "/" + path.getText().toString();
-		// public static MediaPlayer create (Context context, int resid)
-		// StopNote();
-		// PlayNote(path_note);
 		to_show_one_note(path_note);
-		// message=new AlertDialog.Builder(this).create();
-		// message.setTitle("File");
-		// message.setMessage(name_file+"");
-		// message.show();
 	}
 
 	private void to_show_one_note(String file) {
-		
+
 		Intent intent = new Intent(this, ShowOneNote.class);
 		intent.putExtra("NOTE", file + ".mp4");
 		startActivity(intent);
@@ -113,9 +103,9 @@ public class Home extends Activity implements OnItemClickListener {
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
 	}
-	
+
 	private void go_to_my_recorder() {
-		
+
 		Intent intent = new Intent(this, My_Recorder.class);
 		startActivity(intent);
 	}
@@ -181,23 +171,25 @@ public class Home extends Activity implements OnItemClickListener {
 		order_size_asc = !order_size_asc;
 		fa.notifyDataSetChanged();
 	}
-	
+
 	private void sort_by_duration() {
 		Collections.sort(liste_, new Comparator<File>() {
 
 			@Override
 			public int compare(File lhs, File rhs) {
 				if (order_duration_asc) {
-					return (int) (Utils.getFileDuration(lhs) - Utils.getFileDuration(rhs));
+					return (int) (Utils.getFileDuration(lhs) - Utils
+							.getFileDuration(rhs));
 				} else {
-					return (int) (Utils.getFileDuration(rhs) - Utils.getFileDuration(lhs));
+					return (int) (Utils.getFileDuration(rhs) - Utils
+							.getFileDuration(lhs));
 				}
 			}
 		});
 		order_duration_asc = !order_duration_asc;
 		fa.notifyDataSetChanged();
 	}
-	
+
 	private void sort_by_name() {
 		Collections.sort(liste_, new Comparator<File>() {
 
@@ -208,7 +200,7 @@ public class Home extends Activity implements OnItemClickListener {
 				} else {
 					return rhs.getName().compareTo(lhs.getName());
 				}
-			} 
+			}
 		});
 		order_name_asc = !order_name_asc;
 		fa.notifyDataSetChanged();
